@@ -8,7 +8,6 @@
   },
   "scripts": {
     "build": "npx tsc",
-    "vercel-build": "npx tsc",
     "start": "npx tsc && nodemon ./dist/index.js",
     "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
