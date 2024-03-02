@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import {router as urlRouter} from "./routes/url";
 import connectToDb from "./db-config";
-const app = express();
+export const app = express();
 dotenv.config();
 
 const PORT = process.env.PORT;
