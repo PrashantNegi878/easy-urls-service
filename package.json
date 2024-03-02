@@ -3,15 +3,22 @@
   "version": "1.0.0",
   "description": "A url shortner service",
   "main": "src/index.ts",
-  "engines":{
-    "node":"18.x"
+  "engines": {
+    "node": "18.x"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+],
   "scripts": {
-    "build": "npx tsc",
-    "start": "npx tsc && nodemon ./dist/index.js",
+    "start": "nodemon src/index.ts",
     "dev": "nodemon",
+    "build": "rimraf dist && tsc",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    },
   "keywords": [
     "url-shortner"
   ],
@@ -30,6 +37,8 @@
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20.11.22",
     "nodemon": "^3.1.0",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
