@@ -4,10 +4,10 @@
   "description": "A url shortner service",
   "main": "src/index.ts",
   "engines":{
-    "node":"20.x"
+    "node":"18.x"
   },
   "scripts": {
-    "vercel build": "npx tsc",
+    "vercel build": "npx tsc && node ./dist/index.js",
     "build": "npx tsc",
     "start": "npx tsc && nodemon ./dist/index.js",
     "dev": "nodemon",
