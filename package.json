@@ -4,7 +4,7 @@
   "description": "A url shortner service",
   "main": "src/index.ts",
   "engines": {
-    "node": "18.x"
+    "node": "20.x"
   },
   "pre-commit": [
     "ts.check",
