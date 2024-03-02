@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "A url shortner service",
   "main": "src/index.ts",
+  "engines":{
+    "node":"20.x"
+  },
   "scripts": {
+    "vercel build": "npx tsc",
     "build": "npx tsc",
     "start": "npx tsc && nodemon ./dist/index.js",
     "dev": "nodemon",
