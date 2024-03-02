@@ -12,7 +12,7 @@
     "add-build"
 ],
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "start": "tsc && nodemon dist/index.js",
     "dev": "nodemon",
     "build": "rimraf dist && tsc",
     "ts.check": "tsc --project tsconfig.json",
