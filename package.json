@@ -14,7 +14,7 @@
   "scripts": {
     "start": "tsc && nodemon dist/index.js",
     "dev": "nodemon",
-    "vercel-build": "node dist/index.js",
+    "vercel-build": "rimraf dist && tsc",
     "build": "rimraf dist && tsc",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
