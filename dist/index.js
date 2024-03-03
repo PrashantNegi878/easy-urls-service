@@ -15,7 +15,7 @@ const PORT = process.env.PORT;
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
-    origin: ['https://easy-urls-ui.vercel.app/'],
+    origin: ['https://easy-urls-ui.vercel.app/', 'http://localhost:5173/'],
     credentials: true
 }));
 app.use("/url", url_1.router);
