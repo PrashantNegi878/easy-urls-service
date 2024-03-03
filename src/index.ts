@@ -13,7 +13,7 @@ connectToDb();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
-    origin:"*",
+    origin:['https://easy-urls-ui.vercel.app/'],
     credentials:true
 }))
 
