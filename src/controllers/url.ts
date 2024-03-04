@@ -10,7 +10,7 @@ export async function generateShortURL(req: Request, res: Response) {
     const findInDb = await URL.find({
       redirectUrl: body.url,
     });
-    if(findInDb.length>0) return res.status(500).json({ message: ALREADY_EXISTS_ERROR, shortId:findInDb[0].shortId });
+    if(findInDb.length>0) return res.status(200).json({ message: ALREADY_EXISTS_ERROR, shortId:findInDb[0].shortId });
     const shortId = nanoid(9);
     await URL.create({
       shortId: shortId,

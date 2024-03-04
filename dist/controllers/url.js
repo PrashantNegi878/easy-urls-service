@@ -22,7 +22,7 @@ function generateShortURL(req, res) {
                 redirectUrl: body.url,
             });
             if (findInDb.length > 0)
-                return res.status(500).json({ message: constants_1.ALREADY_EXISTS_ERROR, shortId: findInDb[0].shortId });
+                return res.status(200).json({ message: constants_1.ALREADY_EXISTS_ERROR, shortId: findInDb[0].shortId });
             const shortId = (0, nanoid_1.nanoid)(9);
             yield url_1.URL.create({
                 shortId: shortId,
