@@ -15,8 +15,10 @@ const PORT = process.env.PORT;
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.use((0, cors_1.default)({
-    origin: "*",
-    credentials: true
+    origin: ['http://localhost:5173', 'https://easy-urls-ui.vercel.app'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
 }));
 app.use("/url", url_1.router);
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));

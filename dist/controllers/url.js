@@ -8,30 +8,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleAllAnalytics = exports.handleAnalytics = exports.handleRedirect = exports.generateShortURL = void 0;
 const nanoid_1 = require("nanoid");
-const url_1 = require("../models/url");
+const url_1 = __importDefault(require("../models/url"));
 const constants_1 = require("../constants");
 function generateShortURL(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const body = req.body;
             console.log(body);
-            const findInDb = yield url_1.URL.find({
+            const findInDb = yield url_1.default.find({
                 redirectUrl: body.url,
             });
             if (findInDb.length > 0)
                 return res.status(200).json({ message: constants_1.ALREADY_EXISTS_ERROR, shortId: findInDb[0].shortId });
             const shortId = (0, nanoid_1.nanoid)(9);
-            yield url_1.URL.create({
+            yield url_1.default.create({
                 shortId: shortId,
                 redirectUrl: body.url,
                 visitHistory: [],
+                createdBy: req.user._id
             });
             return res.status(201).json({ shortId: shortId });
         }
         catch (err) {
+            console.log(err);
             return res.status(500).json({ message: constants_1.GENERIC_SERVER_ERROR });
         }
     });
@@ -41,7 +46,7 @@ function handleRedirect(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const shortId = req.params.shortId;
-            const entry = yield url_1.URL.findOneAndUpdate({
+            const entry = yield url_1.default.findOneAndUpdate({
                 shortId: shortId,
             }, { $push: { visitHistory: { timestamp: new Date().toDateString() } } });
             if (!entry)
@@ -57,13 +62,8 @@ exports.handleRedirect = handleRedirect;
 function handleAnalytics(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const shortId = req.params.shortId;
-            const entry = yield url_1.URL.findOne({ shortId });
-            return res.json({
-                redirectUrl: entry.redirectUrl,
-                totalClicks: entry.visitHistory.length,
-                timeEntries: entry.visitHistory,
-            });
+            const entry = yield url_1.default.find({ createdBy: req.user._id }).sort({ createdAt: -1 });
+            return res.json(entry);
         }
         catch (err) {
             return res.status(500).json({ message: constants_1.GENERIC_SERVER_ERROR });
@@ -74,7 +74,7 @@ exports.handleAnalytics = handleAnalytics;
 function handleAllAnalytics(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const entry = yield url_1.URL.find({}).sort({ createdAt: -1 });
+            const entry = yield url_1.default.find({}).sort({ createdAt: -1 });
             return res.json(entry);
         }
         catch (err) {

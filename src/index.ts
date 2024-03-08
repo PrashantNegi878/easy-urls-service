@@ -13,8 +13,10 @@ connectToDb();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
-    origin:"*",
-    credentials:true
+    origin: ['http://localhost:5173','https://easy-urls-ui.vercel.app'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
 }))
 
 app.use("/url",urlRouter);
