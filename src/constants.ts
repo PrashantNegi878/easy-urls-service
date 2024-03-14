@@ -1,3 +1,11 @@
 export const GENERIC_SERVER_ERROR:string="OOPS!!! Something went wrong...";
 export const ALREADY_EXISTS_ERROR:string="OOPS!!! Entry already exists...";
 export const NOT_FOUND_ERROR:string="OOPS!!! Short URL not found...";
+export const USER_CREATED_MESSAGE:string="User created successfully.";
+export const USER_ALREADY_EXISTS:string="A user already exists with this email.";
+export const USER_NOT_CREATED_MESSAGE:string="User creation failed.";
+export const FETCHD_USER_DATA:string = "User data fetched successfully.";
+export const FAILED_FETCH_USER:string = "Failed to fetch user data.";
+export const INVALID_USER_DATA:string = "Invalid User email or password.";
+export const MISSING_UID:string = "Missing Auth Token in request headers.";
+export const VALIDATE_USER_FAILED:string = "Could not validate the user.";

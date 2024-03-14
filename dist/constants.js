@@ -1,13 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VALIDATE_USER_FAILED = exports.MISSING_UID = exports.INVALID_USER_DATA = exports.FAILED_FETCH_USER = exports.FETCHD_USER_DATA = exports.USER_NOT_CREATED_MESSAGE = exports.USER_CREATED_MESSAGE = exports.NOT_FOUND_ERROR = exports.ALREADY_EXISTS_ERROR = exports.GENERIC_SERVER_ERROR = void 0;
+exports.VALIDATE_USER_FAILED = exports.MISSING_UID = exports.INVALID_USER_DATA = exports.FAILED_FETCH_USER = exports.FETCHD_USER_DATA = exports.USER_NOT_CREATED_MESSAGE = exports.USER_ALREADY_EXISTS = exports.USER_CREATED_MESSAGE = exports.NOT_FOUND_ERROR = exports.ALREADY_EXISTS_ERROR = exports.GENERIC_SERVER_ERROR = void 0;
 exports.GENERIC_SERVER_ERROR = "OOPS!!! Something went wrong...";
 exports.ALREADY_EXISTS_ERROR = "OOPS!!! Entry already exists...";
 exports.NOT_FOUND_ERROR = "OOPS!!! Short URL not found...";
 exports.USER_CREATED_MESSAGE = "User created successfully.";
+exports.USER_ALREADY_EXISTS = "A user already exists with this email.";
 exports.USER_NOT_CREATED_MESSAGE = "User creation failed.";
 exports.FETCHD_USER_DATA = "User data fetched successfully.";
 exports.FAILED_FETCH_USER = "Failed to fetch user data.";
 exports.INVALID_USER_DATA = "Invalid User email or password.";
-exports.MISSING_UID = "Missing User ID in request header.";
+exports.MISSING_UID = "Missing Auth Token in request headers.";
 exports.VALIDATE_USER_FAILED = "Could not validate the user.";

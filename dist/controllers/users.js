@@ -20,8 +20,12 @@ function handleUserSignup(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { name, email, password } = req.body;
         try {
-            yield users_1.default.create({ name, email, password });
-            return res.status(201).json({ message: constants_1.USER_CREATED_MESSAGE });
+            let user = yield users_1.default.findOne({ email });
+            if (user)
+                return res.status(400).json({ message: constants_1.USER_ALREADY_EXISTS });
+            user = yield users_1.default.create({ name, email, password });
+            const token = (0, auth_1.setUser)(user);
+            return res.status(201).json({ message: constants_1.USER_CREATED_MESSAGE, userName: user.name, token });
         }
         catch (err) {
             return res.status(500).json({ message: constants_1.USER_NOT_CREATED_MESSAGE });
@@ -37,8 +41,7 @@ function handleUserLogin(req, res) {
             if (!user)
                 return res.status(400).json({ message: constants_1.INVALID_USER_DATA });
             const token = (0, auth_1.setUser)(user);
-            res.cookie("uid", token);
-            return res.status(200).json({ message: constants_1.FETCHD_USER_DATA });
+            return res.status(200).json({ message: constants_1.FETCHD_USER_DATA, userName: user.name, token: token });
         }
         catch (err) {
             return res.status(500).json({ message: constants_1.FAILED_FETCH_USER });
