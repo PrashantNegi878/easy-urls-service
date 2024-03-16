@@ -22,6 +22,7 @@ app.use((0, cors_1.default)({
     credentials: true,
     optionsSuccessStatus: 204,
 }));
-app.use("/url", auth_1.default, url_1.router);
+app.use(["/url/analytics", "/url/adminAnalytics",], auth_1.default);
+app.use("/url", url_1.router);
 app.use("/user", users_1.router);
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));

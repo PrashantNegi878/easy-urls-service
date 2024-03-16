@@ -1,10 +1,11 @@
 import { nanoid } from "nanoid";
 import URL from "../models/url";
 import { Request, Response } from "express";
-import { ALREADY_EXISTS_ERROR, GENERIC_SERVER_ERROR, NOT_FOUND_ERROR } from "../constants";
+import { ALREADY_EXISTS_ERROR, GENERIC_SERVER_ERROR, MISSING_UID, NOT_FOUND_ERROR } from "../constants";
 
 export async function generateShortURL(req: Request, res: Response) {
   try {
+    if(!req.user) return res.status(400).json({ message: MISSING_UID });
     const body = req.body;
     console.log(body);
     const findInDb = await URL.find({

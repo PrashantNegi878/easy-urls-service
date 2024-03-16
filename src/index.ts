@@ -21,7 +21,9 @@ app.use(cors({
     optionsSuccessStatus: 204,
 }))
 
-app.use("/url",validateUser,urlRouter);
+app.use(["/url/analytics","/url/adminAnalytics",],validateUser);
+
+app.use("/url",urlRouter);
 app.use("/user",usersRouter)
 
 app.listen(PORT,()=> console.log(`Server started at port ${PORT}`));
