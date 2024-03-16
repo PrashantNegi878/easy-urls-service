@@ -11,12 +11,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const constants_1 = require("../constants");
 const auth_1 = require("../service/auth");
+const applyAuthTo = ['/analytics', '/adminAnalytics'];
 function validateUser(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        if (req.method === 'GET' && !(applyAuthTo.includes(req.path)))
+            return next();
         const fullToken = req.headers.authorization;
         if (!fullToken)
             return res.status(400).json({ message: constants_1.MISSING_UID });
-        const token = fullToken === null || fullToken === void 0 ? void 0 : fullToken.split(' ')[1];
+        const token = fullToken === null || fullToken === void 0 ? void 0 : fullToken.split(" ")[1];
         const user = (0, auth_1.getUser)(token);
         if (!user)
             return res.status(400).json({ message: constants_1.VALIDATE_USER_FAILED });

@@ -19,8 +19,6 @@ const constants_1 = require("../constants");
 function generateShortURL(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            if (!req.user)
-                return res.status(400).json({ message: constants_1.MISSING_UID });
             const body = req.body;
             console.log(body);
             const findInDb = yield url_1.default.find({
@@ -38,7 +36,6 @@ function generateShortURL(req, res) {
             return res.status(201).json({ shortId: shortId });
         }
         catch (err) {
-            console.log(err);
             return res.status(500).json({ message: constants_1.GENERIC_SERVER_ERROR });
         }
     });

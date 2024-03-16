@@ -1,11 +1,10 @@
 import { nanoid } from "nanoid";
 import URL from "../models/url";
 import { Request, Response } from "express";
-import { ALREADY_EXISTS_ERROR, GENERIC_SERVER_ERROR, MISSING_UID, NOT_FOUND_ERROR } from "../constants";
+import { ALREADY_EXISTS_ERROR, GENERIC_SERVER_ERROR, NOT_FOUND_ERROR } from "../constants";
 
 export async function generateShortURL(req: Request, res: Response) {
   try {
-    if(!req.user) return res.status(400).json({ message: MISSING_UID });
     const body = req.body;
     console.log(body);
     const findInDb = await URL.find({
@@ -21,7 +20,6 @@ export async function generateShortURL(req: Request, res: Response) {
     });
     return res.status(201).json({ shortId: shortId });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({ message: GENERIC_SERVER_ERROR });
   }
 }
@@ -35,9 +33,9 @@ export async function handleRedirect(req: Request, res: Response) {
       },
       { $push: { visitHistory: { timestamp: new Date().toDateString() } } }
     );
-    if(!entry) return res.status(400).json({ message: NOT_FOUND_ERROR });
+    if(!entry) return res.status(400).json({ message: NOT_FOUND_ERROR });   
     return res.redirect(entry.redirectUrl);
-  } catch (err: any) {
+  } catch (err: any) {    
     return res.status(500).json({ message: GENERIC_SERVER_ERROR });
   }
 }
